@@ -24,7 +24,7 @@ namespace SuperNaval.Model
             this.orientation = orientation;
         }
 
-        public int Size { get => Size; set => Size = value; }      
+        public int Size { get => size; set => size = value; }      
         public int Row { get => row; set => row = value; }
         public int Col { get => col; set => col = value; }
         public int Orientation { get => orientation; set => orientation = value; }

@@ -52,8 +52,8 @@ namespace SuperNaval
             Casilla casillaPulsada = matriz[posicion.Row, posicion.Column];
            
 
-            PictureBox pic = getPictureBox(posicion.Row, posicion.Column);
-            casillaPulsada.Mostrar(a1);
+            //PictureBox pic = getPictureBox(posicion.Row, posicion.Column);
+            //casillaPulsada.Mostrar(a1);
 
 
             // label1.Text = new TableLayoutPanelCellPosition().ToString();

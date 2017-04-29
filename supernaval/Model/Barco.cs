@@ -12,9 +12,9 @@ namespace SuperNaval.Model
     {
         protected int size;
 
-        public override void Mostrar(Object casilla)
+        public override void Mostrar(DataGridViewCell casilla)
         {
-            casilla = Properties.Resources.Subma30x30;
+            casilla.Value = Properties.Resources.Subma30x30;
         }
 
         public int getSize()

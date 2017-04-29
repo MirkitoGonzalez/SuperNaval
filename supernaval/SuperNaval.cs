@@ -86,7 +86,7 @@ namespace SuperNaval
             matrix = new Casilla[10, 10];
 
             //Desordenamos el array que usaremos para obtener numeros aleatorios sin que se repitan
-            var sortedArray = Enumerable.Range(1, 100).ToArray();
+            var sortedArray = Enumerable.Range(0, 100).ToArray();
             // Este es el indice que usaremos para recorrer el array ya una vez desordenado
             shuffledArray = Shuffle(sortedArray);
 
@@ -97,15 +97,24 @@ namespace SuperNaval
 
 
             //solo para comprobar como se situan los barcos
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    for (int j = 0; j < 10; j++)
-            //    {
-            //       Object casilla = dataGridView.Rows[i].Cells[j].Value = Properties.Resources.Subma30x30;
-            //        if (matrix[i, j]!=null)
-            //            matrix[i, j].Mostrar(casilla);
-            //    }
-            //}
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DataGridViewCell cell;
+                    if (matrix[i, j] != null)
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        matrix[i, j].Mostrar(cell);
+                    }
+                    else
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        Casilla casilla = matrix[i, j] = new Agua();
+                        casilla.Mostrar(cell);
+                    }
+                }
+            }
         }
 
 
@@ -115,36 +124,95 @@ namespace SuperNaval
         {
             for (int i = 0; i < qty; i++)
             {
-                ShipLocation shipLocation = getEmptyPoint(size - 1);
+                ShipLocation shipLocation = getEmptyPoint(size);
 
                 for (int j = 0; j < size; j++)
                 {                  
                     if (shipLocation.Orientation==UP)
                     {
-                        matrix[shipLocation.Row - j, shipLocation.Col] = new Barco();
-                        Object casilla = dataGridView.Rows[shipLocation.Row -j].Cells[shipLocation.Col].Value = Properties.Resources.Subma30x30;
-                            matrix[shipLocation.Row -j, shipLocation.Col].Mostrar(casilla);
+                        matrix[shipLocation.Row - j, shipLocation.Col] = new Barco();                     
                     }
                     else if (shipLocation.Orientation == DOWN)
                     {
-                        matrix[shipLocation.Row + j, shipLocation.Col] = new Barco();
-                        Object casilla = dataGridView.Rows[shipLocation.Row +j].Cells[shipLocation.Col].Value = Properties.Resources.Subma30x30;
-                        matrix[shipLocation.Row +j, shipLocation.Col].Mostrar(casilla);
+                        matrix[shipLocation.Row + j, shipLocation.Col] = new Barco();                    
                     }
                     else if (shipLocation.Orientation == LEFT)
                     {
-                        matrix[shipLocation.Row, shipLocation.Col - j] = new Barco();
-                        Object casilla = dataGridView.Rows[shipLocation.Row].Cells[shipLocation.Col-j].Value = Properties.Resources.Subma30x30;
-                        matrix[shipLocation.Row, shipLocation.Col -j].Mostrar(casilla);
+                        matrix[shipLocation.Row, shipLocation.Col - j] = new Barco();                    
                     }
                     else if (shipLocation.Orientation == RIGHT)
                     {
-                        matrix[shipLocation.Row, shipLocation.Col + j] = new Barco();
-                        Object casilla = dataGridView.Rows[shipLocation.Row].Cells[shipLocation.Col + j].Value = Properties.Resources.Subma30x30;
-                        matrix[shipLocation.Row, shipLocation.Col + j].Mostrar(casilla);
+                        matrix[shipLocation.Row, shipLocation.Col + j] = new Barco();                    
                     }
                 }
+                rodearConAgua(shipLocation);
+            }
+        }
 
+        private void rodearConAgua(ShipLocation shipLocation)
+        {
+            for (int i = 0; i < shipLocation.Size; i++)
+            {
+                if (shipLocation.Orientation == UP)
+                {
+                    rodeaCasilladeAgua(shipLocation.Row - i, shipLocation.Col);
+                }
+                else if (shipLocation.Orientation == DOWN)
+                {
+                    rodeaCasilladeAgua(shipLocation.Row + i, shipLocation.Col);
+                }
+                else if (shipLocation.Orientation == LEFT)
+                {
+                    rodeaCasilladeAgua(shipLocation.Row, shipLocation.Col - i);
+                }
+                else if (shipLocation.Orientation == RIGHT)
+                {
+                    rodeaCasilladeAgua(shipLocation.Row, shipLocation.Col + i);
+                }
+            }
+        }
+
+        private void rodeaCasilladeAgua(int row, int col)
+        {
+            // Esquina superior izquierda
+            if (row - 1 >= 0 && col - 1 >= 0 && matrix[row - 1, col - 1] == null)
+            {
+                matrix[row -1, col -1] = new Agua();
+            }
+            // Esquina superior derecha
+            if (row - 1 >= 0 && col + 1 <= 9 && matrix[row - 1, col + 1] == null)
+            {
+                matrix[row - 1, col + 1] = new Agua();
+            }
+            // Esquina inferior izquierda
+            if (row + 1 <= 9 && col - 1 >= 0 && matrix[row + 1, col - 1] == null)
+            {
+                matrix[row + 1, col - 1] = new Agua();
+            }
+            // Esquina inferior derecha
+            if (row + 1 <= 9 && col + 1 <= 9 && matrix[row + 1, col + 1] == null)
+            {
+                matrix[row + 1, col + 1] = new Agua();
+            }
+            // Izquierda
+            if (col - 1 >= 0 && matrix[row, col - 1] == null)
+            {
+                matrix[row, col - 1] = new Agua();
+            }
+            // Derecha
+           if (row + 1 <= 9 && matrix[row + 1, col] == null)
+            {
+                matrix[row +1, col] = new Agua();
+            }
+            // Abajo
+            if (col + 1 <= 9 && matrix[row, col + 1] == null)
+            {
+                matrix[row, col + 1] = new Agua();
+            }
+            // Arriba
+            if (row - 1 >= 0 && matrix[row -1, col] == null)
+            {
+                matrix[row-1, col] = new Agua();
             }
         }
 
@@ -190,7 +258,7 @@ namespace SuperNaval
 
             if (orientation == LEFT)
             {
-                if (col + size >= 0)
+                if (col - size-1 >= 0)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -207,7 +275,7 @@ namespace SuperNaval
             }
             else if (orientation == RIGHT)
             {
-                if (col + size <= NUM_COLS - 1)
+                if (col + size-1 <= NUM_COLS - 1)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -224,7 +292,7 @@ namespace SuperNaval
             }
             else if (orientation == UP)
             {
-                if (row + size >= 0)
+                if (row - size-1 >= 0)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -241,7 +309,7 @@ namespace SuperNaval
             }
             else if (orientation == DOWN)
             {
-                if (row + size <= NUM_ROWS - 1)
+                if (row + size-1 <= NUM_ROWS - 1)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -295,6 +363,103 @@ namespace SuperNaval
         private void btnIniciar_Click(object sender, EventArgs e)
         {
             Initialize();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            createBoat(4, 1);         
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DataGridViewCell cell;
+                    if (matrix[i, j] != null)
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        matrix[i, j].Mostrar(cell);
+                    }
+                    //else{
+                    //    cell = dataGridView.Rows[i].Cells[j];
+                    //    Casilla casilla = matrix[i, j] = new Agua();
+                    //    casilla.Mostrar(cell);
+                    //}
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+           
+            createBoat(3, 2);
+           
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DataGridViewCell cell;
+                    if (matrix[i, j] != null)
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        matrix[i, j].Mostrar(cell);
+                    }
+                    //else{
+                    //    cell = dataGridView.Rows[i].Cells[j];
+                    //    Casilla casilla = matrix[i, j] = new Agua();
+                    //    casilla.Mostrar(cell);
+                    //}
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            
+            createBoat(2, 3);
+            
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DataGridViewCell cell;
+                    if (matrix[i, j] != null)
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        matrix[i, j].Mostrar(cell);
+                    }
+                    //else{
+                    //    cell = dataGridView.Rows[i].Cells[j];
+                    //    Casilla casilla = matrix[i, j] = new Agua();
+                    //    casilla.Mostrar(cell);
+                    //}
+                }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+           
+            createBoat(1, 4);
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DataGridViewCell cell;
+                    if (matrix[i, j] != null)
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        matrix[i, j].Mostrar(cell);
+                    }
+                    //else{
+                    //    cell = dataGridView.Rows[i].Cells[j];
+                    //    Casilla casilla = matrix[i, j] = new Agua();
+                    //    casilla.Mostrar(cell);
+                    //}
+                }
+            }
         }
     }
 }

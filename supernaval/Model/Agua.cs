@@ -22,9 +22,9 @@ namespace SuperNaval.Model
         {
         }
 
-        public override void Mostrar(Object casilla)
+        public override void Mostrar(DataGridViewCell casilla)
         {
-            casilla = Properties.Resources.Agua3;
+            casilla.Style.BackColor = System.Drawing.Color.Blue;
         }
 
     }

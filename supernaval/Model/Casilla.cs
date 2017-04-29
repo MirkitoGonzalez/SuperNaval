@@ -11,6 +11,6 @@ namespace SuperNaval.Model
     {
         public int row;
         public int col;
-        public abstract void Mostrar(Object casilla);
+        public abstract void Mostrar(DataGridViewCell casilla);
     }
 }
