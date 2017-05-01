@@ -51,7 +51,6 @@ C:\Users\cristian\Desktop\SuperNaval - PictureBox\SuperNaval - PictureBox\SuperN
 C:\Users\cristian\Desktop\SuperNaval - PictureBox\SuperNaval - PictureBox\SuperNaval\obj\Debug\SuperNaval.pdb
 C:\Users\cristian\Desktop\SuperNaval - PictureBox\SuperNaval - PictureBox\SuperNaval\obj\Debug\SuperNaval.SuperNaval.resources
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\obj\Debug\SuperNaval.csprojResolveAssemblyReference.cache
-C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\obj\Debug\SuperNaval.Form1.resources
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\obj\Debug\SuperNaval.Properties.Resources.resources
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\obj\Debug\SuperNaval.Rendirse.resources
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\obj\Debug\SuperNaval.SuperNaval.resources

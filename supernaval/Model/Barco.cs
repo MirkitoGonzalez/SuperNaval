@@ -8,26 +8,49 @@ using System.Windows.Forms;
 namespace SuperNaval.Model
 {
 
-    public class Barco : Casilla
+    public abstract class Barco : Casilla
     {
         protected int size;
+        protected int damage;
+        protected bool hiited;
+        protected static string TOCADO = "Tocado";
+        protected static string HUNDIDO  = "Tocado y hundido";
 
         public override void Mostrar(DataGridViewCell casilla)
         {
-            casilla.Value = Properties.Resources.Subma30x30;
+            casilla.Value = Properties.Resources.destruccion;
+            damage++;
+            hiited = true;
         }
-
         public int getSize()
         {
-            return this.size;
+            return size;
         }
+        public int getDamage()
+        {
+            return damage;
+        }
+        public bool isHitted()
+        {
+            return hiited;
+        }
+
     }
     public class Portaviones : Barco
     {
-        public Portaviones(int size)
-        {
-            // 1 de este
+        public Portaviones()
+        {         
             size = 4;
+            damage = 0;
+        }
+        public override string getMessage()
+        {
+            if (size > damage)
+            {
+                return TOCADO;
+            }
+            else
+                return HUNDIDO;
         }
     }
     public class Crucero : Barco
@@ -35,6 +58,16 @@ namespace SuperNaval.Model
         public Crucero()
         {
             size = 3;
+            damage = 0;
+        }
+        public override string getMessage()
+        {
+            if (size > damage)
+            {
+                return TOCADO;
+            }
+            else
+                return HUNDIDO;
         }
     }
     public class Destroyer : Barco
@@ -42,6 +75,16 @@ namespace SuperNaval.Model
         public Destroyer()
         {
             size = 2;
+            damage = 0;
+        }
+        public override string getMessage()
+        {
+            if (size > damage)
+            {
+                return TOCADO;
+            }
+            else
+                return HUNDIDO;
         }
     }
     public class Submarine : Barco
@@ -49,6 +92,11 @@ namespace SuperNaval.Model
         public Submarine()
         {
             size = 1;
+            damage = 0;
+        }
+        public override string getMessage()
+        {
+            return HUNDIDO;
         }
 
 

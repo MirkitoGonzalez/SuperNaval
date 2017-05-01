@@ -22,6 +22,10 @@ namespace SuperNaval
         private static int NUM_COLS = 10;
         private static int WIDTH = 50;
         private static int HEIGHT = 50;
+        private static int SUBMARINO = 1;
+        private static int DESTRUCTOR = 2;
+        private static int CRUCERO = 3;
+        private static int PORTAVIONES = 4;
 
 
         IList<int> shuffledArray;
@@ -39,6 +43,7 @@ namespace SuperNaval
 
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
 
+            this.dataGridView.DoubleBuffered(true);
             // tamaño del grid
             dataGridView.Width = WIDTH * NUM_ROWS;
             dataGridView.Height = HEIGHT * NUM_COLS;
@@ -95,54 +100,81 @@ namespace SuperNaval
             createBoat(2, 3);
             createBoat(1, 4);
 
+            rellenarSobrantesAgua();
 
-            //solo para comprobar como se situan los barcos
+            dataGridView.Enabled = true;
+
+
+            ////solo para comprobar como se situan los barcos
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    for (int j = 0; j < 10; j++)
+            //    {
+            //        DataGridViewCell cell;
+            //        if (matrix[i, j] != null)
+            //        {
+            //            cell = dataGridView.Rows[i].Cells[j];
+            //            matrix[i, j].Mostrar(cell);
+            //        }
+            //        else
+            //        {
+            //            cell = dataGridView.Rows[i].Cells[j];
+            //            Casilla casilla = matrix[i, j] = new Agua();
+            //            casilla.Mostrar(cell);
+            //        }
+            //    }
+            //}
+        }
+
+
+        private void rellenarSobrantesAgua()
+        {
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
-                {
-                    DataGridViewCell cell;
-                    if (matrix[i, j] != null)
-                    {
-                        cell = dataGridView.Rows[i].Cells[j];
-                        matrix[i, j].Mostrar(cell);
-                    }
-                    else
-                    {
-                        cell = dataGridView.Rows[i].Cells[j];
-                        Casilla casilla = matrix[i, j] = new Agua();
-                        casilla.Mostrar(cell);
+                {                                    
+                    if (matrix[i, j] == null)
+                    {                       
+                        Casilla casilla = matrix[i, j] = new Agua();                       
                     }
                 }
             }
         }
-
-
-
 
         private void createBoat(int size, int qty)
         {
             for (int i = 0; i < qty; i++)
             {
                 ShipLocation shipLocation = getEmptyPoint(size);
+                Barco barco;
+
+                if (size == SUBMARINO)
+                    barco = new Submarine();
+                else if (size == DESTRUCTOR)
+                    barco = new Destroyer();
+                else if (size == CRUCERO)
+                    barco = new Crucero();
+                else
+                    barco = new Portaviones();
+
 
                 for (int j = 0; j < size; j++)
                 {                  
                     if (shipLocation.Orientation==UP)
                     {
-                        matrix[shipLocation.Row - j, shipLocation.Col] = new Barco();                     
+                        matrix[shipLocation.Row - j, shipLocation.Col] = barco;                    
                     }
                     else if (shipLocation.Orientation == DOWN)
                     {
-                        matrix[shipLocation.Row + j, shipLocation.Col] = new Barco();                    
+                        matrix[shipLocation.Row + j, shipLocation.Col] = barco;
                     }
                     else if (shipLocation.Orientation == LEFT)
                     {
-                        matrix[shipLocation.Row, shipLocation.Col - j] = new Barco();                    
+                        matrix[shipLocation.Row, shipLocation.Col - j] = barco;
                     }
                     else if (shipLocation.Orientation == RIGHT)
                     {
-                        matrix[shipLocation.Row, shipLocation.Col + j] = new Barco();                    
+                        matrix[shipLocation.Row, shipLocation.Col + j] = barco;
                     }
                 }
                 rodearConAgua(shipLocation);
@@ -349,9 +381,16 @@ namespace SuperNaval
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {             
+            DataGridViewCell cell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            Casilla casilla = matrix[e.RowIndex, e.ColumnIndex];
+            casilla.Mostrar(cell);
+            
 
-            label1.Text = e.RowIndex + "," + e.ColumnIndex;
+            string position = e.RowIndex + "," + e.ColumnIndex;
+            string message = casilla.getMessage();
+
+            label1.Text = position + " - " + message;
 
         }
 
@@ -364,6 +403,8 @@ namespace SuperNaval
         {
             Initialize();
         }
+
+
 
         private void button4_Click(object sender, EventArgs e)
         {

@@ -22,6 +22,11 @@ namespace SuperNaval.Model
         {
         }
 
+        public override string getMessage()
+        {
+            return "Agua";
+        }
+
         public override void Mostrar(DataGridViewCell casilla)
         {
             casilla.Style.BackColor = System.Drawing.Color.Blue;
