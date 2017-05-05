@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace SuperNaval.Model
 {
     /// <summary>
-    /// The tile are the individual pieces of the map.
+    /// Todo lo que llena la matriz de 10x10 (excluyendo los barcos(es hija de casilla))
     /// </summary>
     public class Agua : Casilla
     {

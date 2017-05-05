@@ -61,3 +61,14 @@ C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\obj\Debug\S
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\bin\Debug\SuperNaval.exe.config
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\bin\Debug\SuperNaval.exe
 C:\Users\cristian\Source\Repos\SuperNavalBueno\SuperNaval\SuperNaval\bin\Debug\SuperNaval.pdb
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\bin\Debug\SuperNaval.exe.config
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\bin\Debug\SuperNaval.exe
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\bin\Debug\SuperNaval.pdb
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.csprojResolveAssemblyReference.cache
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.Properties.Resources.resources
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.Rendirse.resources
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.SuperNaval.resources
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.Wiin.resources
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.csproj.GenerateResource.Cache
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.exe
+C:\Users\1DAW\Documents\Barcus\SuperNaval\SuperNaval\obj\Debug\SuperNaval.pdb

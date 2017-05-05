@@ -132,10 +132,10 @@ namespace SuperNaval
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
-                {                                    
+                {
                     if (matrix[i, j] == null)
-                    {                       
-                        Casilla casilla = matrix[i, j] = new Agua();                       
+                    {
+                        Casilla casilla = matrix[i, j] = new Agua();
                     }
                 }
             }
@@ -159,10 +159,10 @@ namespace SuperNaval
 
 
                 for (int j = 0; j < size; j++)
-                {                  
-                    if (shipLocation.Orientation==UP)
+                {
+                    if (shipLocation.Orientation == UP)
                     {
-                        matrix[shipLocation.Row - j, shipLocation.Col] = barco;                    
+                        matrix[shipLocation.Row - j, shipLocation.Col] = barco;
                     }
                     else if (shipLocation.Orientation == DOWN)
                     {
@@ -209,7 +209,7 @@ namespace SuperNaval
             // Esquina superior izquierda
             if (row - 1 >= 0 && col - 1 >= 0 && matrix[row - 1, col - 1] == null)
             {
-                matrix[row -1, col -1] = new Agua();
+                matrix[row - 1, col - 1] = new Agua();
             }
             // Esquina superior derecha
             if (row - 1 >= 0 && col + 1 <= 9 && matrix[row - 1, col + 1] == null)
@@ -232,9 +232,9 @@ namespace SuperNaval
                 matrix[row, col - 1] = new Agua();
             }
             // Derecha
-           if (row + 1 <= 9 && matrix[row + 1, col] == null)
+            if (row + 1 <= 9 && matrix[row + 1, col] == null)
             {
-                matrix[row +1, col] = new Agua();
+                matrix[row + 1, col] = new Agua();
             }
             // Abajo
             if (col + 1 <= 9 && matrix[row, col + 1] == null)
@@ -242,9 +242,9 @@ namespace SuperNaval
                 matrix[row, col + 1] = new Agua();
             }
             // Arriba
-            if (row - 1 >= 0 && matrix[row -1, col] == null)
+            if (row - 1 >= 0 && matrix[row - 1, col] == null)
             {
-                matrix[row-1, col] = new Agua();
+                matrix[row - 1, col] = new Agua();
             }
         }
 
@@ -290,7 +290,7 @@ namespace SuperNaval
 
             if (orientation == LEFT)
             {
-                if (col - size-1 >= 0)
+                if (col - size - 1 >= 0)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -307,7 +307,7 @@ namespace SuperNaval
             }
             else if (orientation == RIGHT)
             {
-                if (col + size-1 <= NUM_COLS - 1)
+                if (col + size - 1 <= NUM_COLS - 1)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -324,7 +324,7 @@ namespace SuperNaval
             }
             else if (orientation == UP)
             {
-                if (row - size-1 >= 0)
+                if (row - size - 1 >= 0)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -341,7 +341,7 @@ namespace SuperNaval
             }
             else if (orientation == DOWN)
             {
-                if (row + size-1 <= NUM_ROWS - 1)
+                if (row + size - 1 <= NUM_ROWS - 1)
                 {
                     for (int i = 0; i < size; i++)
                     {
@@ -381,17 +381,18 @@ namespace SuperNaval
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {             
+        {
             DataGridViewCell cell = dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex];
             Casilla casilla = matrix[e.RowIndex, e.ColumnIndex];
             casilla.Mostrar(cell);
-            
+
 
             string position = e.RowIndex + "," + e.ColumnIndex;
             string message = casilla.getMessage();
 
-            label1.Text = position + " - " + message;
-
+            // label1.Text = position + " - " + message;
+            label1.Text = position;
+            label2.Text = message;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -408,7 +409,7 @@ namespace SuperNaval
 
         private void button4_Click(object sender, EventArgs e)
         {
-            createBoat(4, 1);         
+            createBoat(4, 1);
 
             for (int i = 0; i < 10; i++)
             {
@@ -431,9 +432,9 @@ namespace SuperNaval
 
         private void button5_Click(object sender, EventArgs e)
         {
-           
+
             createBoat(3, 2);
-           
+
 
             for (int i = 0; i < 10; i++)
             {
@@ -456,9 +457,9 @@ namespace SuperNaval
 
         private void button6_Click(object sender, EventArgs e)
         {
-            
+
             createBoat(2, 3);
-            
+
 
             for (int i = 0; i < 10; i++)
             {
@@ -481,7 +482,7 @@ namespace SuperNaval
 
         private void button7_Click(object sender, EventArgs e)
         {
-           
+
             createBoat(1, 4);
 
             for (int i = 0; i < 10; i++)
@@ -499,6 +500,42 @@ namespace SuperNaval
                     //    Casilla casilla = matrix[i, j] = new Agua();
                     //    casilla.Mostrar(cell);
                     //}
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Rendirse Rndirse = new Rendirse();
+            Rndirse.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Wiin Win = new Wiin();
+            Win.Show();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+            //solo para comprobar como se situan los barcos
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    DataGridViewCell cell;
+                    if (matrix[i, j] != null)
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        matrix[i, j].Mostrar(cell);
+                    }
+                    else
+                    {
+                        cell = dataGridView.Rows[i].Cells[j];
+                        Casilla casilla = matrix[i, j] = new Agua();
+                        casilla.Mostrar(cell);
+                    }
                 }
             }
         }
